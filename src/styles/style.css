@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: Bebas neue;
+  src: url('../assets/fonts/BebasNeue-Regular.otf');
+}
+
+.font-bebas {
+  font-family: Bebas neue;
+}
+
+.bg-gray-900-40 {
+  background-color: rgba(18, 18, 20, 0.53);
+}
+
+.text-gray-900-40 {
+  color: rgba(18, 18, 20, 0.53);
+}
+
+input {
+  text-transform: capitalize;
+}
+
+input[type='date']::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+table {
+  @apply mx-auto mt-5 outline outline-2 outline-teal-700 text-emerald-200 bg-gray-900 p-6 rounded font-serif;
+}
+
+tbody {
+  width: 100%;
+}
+
+tr {
+  @apply border-b border-teal-200 text-center w-full;
+}
+
+tr th,
+td {
+  @apply px-4 w-fit py-1;
+  text-transform: uppercase;
+}
+
+.first-tr {
+  @apply border-b-2 border-teal-700;
+}
+
+.redirectors {
+  @apply font-bold text-teal-200 bg-teal-900 flex items-center px-4 py-3 rounded hover:bg-teal-700 transition-colors;
+}
+
+.pattern-redirectors {
+  @apply flex justify-around relative top-10 font-serif tracking-wide text-xl;
+}
+
+dialog form #email,
+#password {
+  text-transform: lowercase !important;
+  @apply font-serif;
+}
+
+dialog form {
+  @apply flex  flex-1 flex-col gap-8;
+}
+
+#email::placeholder,
+#password::placeholder {
+  text-transform: capitalize;
+}
+
+#tables {
+  display: none;
+}
+
+#table-client {
+  display: none;
+}
