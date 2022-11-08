@@ -27,6 +27,10 @@ input[type='date']::-webkit-calendar-picker-indicator {
   display: none;
 }
 
+input::target-text {
+  background: transparent;
+}
+
 input[type='number']::-webkit-inner-spin-button,
 input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
