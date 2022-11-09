@@ -10,7 +10,20 @@
   <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon/favicon-16x16.png">
   <link rel="manifest" href="../assets/favicon/site.webmanifest">
-  <link rel="stylesheet" href="../styles/style.css">
+  <link rel="stylesheet" href="../styles/style.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!--   npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch  -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            body: '#1C1C1C'
+          }
+        }
+      }
+    }
+  </script>
 
 </head>
 

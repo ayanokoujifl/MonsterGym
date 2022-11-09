@@ -4,8 +4,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="../../dist/output.css" rel="stylesheet" />
-
+  <link rel="stylesheet" href="../styles/style.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!--   npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch  -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            body: '#1C1C1C'
+          }
+        }
+      }
+    }
+  </script>
   <title>Visualizar cadastrados</title>
 </head>
 

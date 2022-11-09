@@ -88,3 +88,7 @@ dialog form {
 #table-client {
   display: none;
 }
+
+option p {
+  @apply bg-gray-900 text-teal-900;
+}
