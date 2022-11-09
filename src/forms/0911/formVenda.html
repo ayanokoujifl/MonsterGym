@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Vendas</h1>
+
+    <form action="">
+      <div>
+        <h2>Dados básicos</h2>
+        <label for="client">Cliente:</label>
+        <input
+          type="text"
+          name="client"
+          id="client"
+          placeholder="Ex: Rosinei"
+        />
+        <label for="dateSale">Venda:</label>
+        <input
+          type="text"
+          name="dateSale"
+          id="dateSale"
+          placeholder="Ex: 01/01/1990"
+          onfocus="this.type('date')"
+        />
+        <label for="quantity">Quantidade:</label>
+        <input type="number" name="quantity" id="quantity" placeholder="Ex:5" />
+      </div>
+      <div>
+        <h2>Adicionar itens</h2>
+        <label for="product">Produto:</label>
+        <select name="product" id="product">
+          <option value="" disabled selected>--- Selecione ---</option>
+        </select>
+      </div>
+      <div>
+        <h2>Itens adicionados</h2>
+      </div>
+    </form>
+    <script src="./itensDeVenda.js"></script>
+  </body>
+</html>

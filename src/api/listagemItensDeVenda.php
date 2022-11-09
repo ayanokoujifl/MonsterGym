@@ -10,7 +10,8 @@
   <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon/favicon-16x16.png">
   <link rel="manifest" href="../assets/favicon/site.webmanifest">
   <link rel="stylesheet" href="../../dist/output.css">
-  <title>Produto</title>
+  <title>Itens de Venda</title>
+</head>
 
 <body class="bg-body">
   <header class="mt-4 flex justify-center items-center">
@@ -19,7 +20,7 @@
   </header>
 
   <h2 class="text-center text-2xl mt-4 text-teal-500">
-    <i> Listagem de Equipamentos</i>
+    <i> Listagem de Itens de Venda</i>
   </h2>
 
   <table border="1px">
@@ -28,33 +29,37 @@
         ID
       </th>
       <th>
-        Nome
+        Venda
       </th>
       <th>
-        Valor
+        Produto
       </th>
       <th>
-        Estoque
+        Produto
       </th>
       <th>
-        Fornecedor
+        Quantidade
+      </th>
+      <th>
+        Total
       </th>
     </tr>
 
     <?php
-    require_once '../dao/DaoProduto.php';
+    require_once '../dao/DaoItensDeVenda.php';
     require_once '../dao/Conexao.php';
 
-    $dc = new DaoProduto();
+    $dc = new DaoItensDeVenda();
     $lista = $dc->listar();
 
     foreach ($lista as $linha) {
       echo '<tr>';
       echo '<td>' . $linha['id'] . '</td>';
-      echo '<td>' . $linha['nome'] . '</td>';
-      echo '<td>' . $linha['valor'] . '</td>';
-      echo '<td>' . $linha['estoque'] . '</td>';
-      echo '<td>' . $linha['id_fornecedor'] . '</td>';
+      echo '<td>' . $linha['venda_id'] . '</td>';
+      echo '<td>' . $linha['produto_id'] . '</td>';
+      echo '<td>' . $linha['produto'] . '</td>';
+      echo '<td>' . $linha['quantidade'] . '</td>';
+      echo '<td>' . $linha['total'] . '</td>';
     }
     ?>
   </table>
@@ -67,7 +72,7 @@
     </p>
     <a href="../index.html" class="redirectors">Tela de inicio</a>
   </div>
+  <script src="../forms/0911/itensDeVenda.js"></script>
 </body>
-</head>
 
 </html>

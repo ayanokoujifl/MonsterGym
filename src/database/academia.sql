@@ -156,7 +156,6 @@ create procedure pd_itensDeVendas(venda bigint ,produto bigint,quantidade intege
 begin
 insert into itensDeVenda values (null,venda,produto,quantidade,total);
 end $
-
 drop trigger if exists tg_itensDeVendas;
 delimiter $
 create trigger tg_itensDeVendas 

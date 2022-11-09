@@ -5,7 +5,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../dist/output.css">
+    <link rel="stylesheet" href="../styles/style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!--   npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch  -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        body: '#1C1C1C'
+                    }
+                }
+            }
+        }
+    </script>
 
     <link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/favicon-32x32.png">
@@ -26,7 +39,7 @@
     </h2>
 
 
-    <table>
+    <table class="mx-auto mt-6">
         <tr class="border-b-2 border-teal-700">
             <th>
                 ID
