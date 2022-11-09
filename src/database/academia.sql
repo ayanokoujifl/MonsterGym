@@ -2,73 +2,80 @@ drop database if exists academia;
 CREATE DATABASE ACADEMIA;
 USE ACADEMIA;
 
-create table cliente (
-id bigint auto_increment,
- nome varchar(255),
- cpf bigint,
- data_nascimento date,
- dia_pagamento integer,
- valor_mensalidade double,
- primary key (id));
- 
- create table fornecedor (
- id bigint auto_increment,
- cnpj bigint, 
- nome varchar(255),
- primary key (id));
- 
- create table funcionario (
- id bigint auto_increment,
- cpf bigint,
- data_nascimento date,
- dia_pagamento integer,
- nome varchar(255),
- salario double,
- tipo varchar(255),
- primary key (id));
- 
- create table modalidade (
- id bigint auto_increment,
- nome varchar(255),
- valor double,
- primary key (id));
- 
- create table produto(
- id bigint auto_increment,
- nome varchar(255),
- valor double,
- estoque int,
- id_fornecedor bigint,
- primary key (id));
- 
- create table venda (
- id bigint auto_increment,
- data_venda date,
- cliente_id bigint,
- produto bigint,
-quantidade integer,
-total float(10,2),
- primary key (id));
-
-create table itensDeVenda(
-id bigint auto_increment,
-venda_id bigint,
-produto_id bigint,
-primary key(id)
+CREATE TABLE cliente (
+    id BIGINT AUTO_INCREMENT,
+    nome VARCHAR(255),
+    cpf BIGINT,
+    data_nascimento DATE,
+    dia_pagamento INTEGER,
+    valor_mensalidade DOUBLE,
+    PRIMARY KEY (id)
 );
  
- create table equipamento (
- id bigint auto_increment,
- nome varchar(255),
- periodo_revisao integer,
- id_fornecedor bigint,
- primary key (id));
+CREATE TABLE fornecedor (
+    id BIGINT AUTO_INCREMENT,
+    cnpj BIGINT,
+    nome VARCHAR(255),
+    PRIMARY KEY (id)
+);
  
- create table cliente_modalidade(
- id bigint primary key auto_increment,
- cliente bigint,
- modalidade bigint
- );
+CREATE TABLE funcionario (
+    id BIGINT AUTO_INCREMENT,
+    cpf BIGINT,
+    data_nascimento DATE,
+    dia_pagamento INTEGER,
+    nome VARCHAR(255),
+    salario DOUBLE,
+    tipo VARCHAR(255),
+    PRIMARY KEY (id)
+);
+ 
+CREATE TABLE modalidade (
+    id BIGINT AUTO_INCREMENT,
+    nome VARCHAR(255),
+    valor DOUBLE,
+    PRIMARY KEY (id)
+);
+ 
+CREATE TABLE produto (
+    id BIGINT AUTO_INCREMENT,
+    nome VARCHAR(255),
+    valor DOUBLE,
+    estoque INT,
+    id_fornecedor BIGINT,
+    PRIMARY KEY (id)
+);
+ 
+CREATE TABLE venda (
+    id BIGINT AUTO_INCREMENT,
+    data_venda DATE,
+    cliente_id BIGINT,
+    produto BIGINT,
+    quantidade INTEGER,
+    total FLOAT(10 , 2 ),
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE itensDeVenda (
+    id BIGINT AUTO_INCREMENT,
+    venda_id BIGINT,
+    produto_id BIGINT,
+    PRIMARY KEY (id)
+);
+ 
+CREATE TABLE equipamento (
+    id BIGINT AUTO_INCREMENT,
+    nome VARCHAR(255),
+    periodo_revisao INTEGER,
+    id_fornecedor BIGINT,
+    PRIMARY KEY (id)
+);
+ 
+CREATE TABLE cliente_modalidade (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    cliente BIGINT,
+    modalidade BIGINT
+);
  
 alter table cliente_modalidade add constraint fkcliente foreign key (cliente) references cliente(id),
 add constraint fkmodalidade foreign key(modalidade) references modalidade(id);
@@ -149,7 +156,6 @@ create procedure pd_itensDeVendas(venda bigint ,produto bigint,quantidade intege
 begin
 insert into itensDeVenda values (null,venda,produto,quantidade,total);
 end $
-
 drop trigger if exists tg_itensDeVendas;
 delimiter $
 create trigger tg_itensDeVendas 
@@ -190,17 +196,71 @@ where produto.id=produto;
 insert into venda(id,data_venda,cliente_id,produto,quantidade,total) values (id,data_venda,cliente_id,produto,quantidade,@valor*quantidade);
 end $
 
+drop procedure if exists pd_validar_cliente;
+delimiter $
+create procedure pd_validar_cliente(nome varchar(255),cpf bigint,data_nascimento date, dia_pagamento int, valor_mensalidade float(10,2))
+main:begin
+declare existe int;
+if(CPF.length() > 11 or CPF.length() < 11) then
+select 'CPF inválido' as 'Resposta';
+leave main;
+end if;
+select count(c.cpf) into existe from cliente c 
+where cpf=c.cpf;
+if(existe>0) then 
+select 'CPF já existente no sistema' as 'resposta';
+leave main;
+end if;
+insert into cliente values(null,nome,cpf,data_nascimento,dia_pagamento,valor_mensalidade);
+end
+$
+
+delimiter $
+create trigger tg_delete_cliente
+before delete on cliente
+for each row
+begin
+
+delete from itensdevenda
+where venda_id=(select id from venda
+where cliente_id=old.id group by cliente_id);
+DELETE FROM venda 
+WHERE cliente_id = old.id;
+
+delete from cliente_modalidade
+where cliente=old.id;
+end
+$
+
+$
+create trigger tg_delete_venda
+before delete on venda
+for each row
+begin
+delete from itensdevenda
+where venda_id=old.id;
+end
+$
 
 insert into fornecedor values(null,12345678912312,'abelardo');
 insert into produto values(null,'Anilha de 5kg',50,200,1),(null,'Barra de ferro 5kg',80,50,1);
-INSERT INTO CLIENTE(id,NOME,CPF,VALOR_MENSALIDADE,DATA_NASCIMENTO,DIA_PAGAMENTO) VALUES(null,'LUIS',16564423616,90.00,'2004-08-17',10),(null,'CARLOS EDUARDO',13649862313,110.00,'2005-02-24',22);
+INSERT INTO CLIENTE(id,NOME,CPF,VALOR_MENSALIDADE,DATA_NASCIMENTO,DIA_PAGAMENTO) VALUES(null,'LUIS',16564423616,90.00,'2004-08-17',10),(null,'CARLOS EDUARDO',13649862313,70,'2005-02-24',22);
 INSERT INTO FUNCIONARIO(id,NOME,CPF,DATA_NASCIMENTO,DIA_PAGAMENTO,SALARIO,TIPO)VALUES(null,'DAYLER',12345678910,'1988-10-20',3,25000,'RH');
-insert into cliente values(null,'luis',16564423616,'2004-08-17',20,89.99);
+INSERT INTO FUNCIONARIO(id,NOME,CPF,DATA_NASCIMENTO,DIA_PAGAMENTO,SALARIO,TIPO)VALUES(null,'ROSINEI',12345678910,'1988-10-20',3,25000,'RH');
+INSERT INTO FUNCIONARIO(id,NOME,CPF,DATA_NASCIMENTO,DIA_PAGAMENTO,SALARIO,TIPO)VALUES(null,'GEOVALIA',12345678910,'1988-10-20',3,25000,'RH');
+insert into cliente values(null,'luis',16564424736,'2004-08-17',20,89.99);
 insert into cliente values(null,'abelardo',12345678920,'1990-10-10',20,70.00);
 insert into equipamento values(null,'Crossover',3,1);
+
 call pd_venda(null,'2022-10-09',1,1,2);
 call pd_venda(null,'2022-10-09',2,2,5);
+call pd_venda(null,'2022-10-09',2,2,5);
+call pd_venda(null,'2022-10-09',2,1,5);
 
-select i.*,p.nome,v.quantidade,v.total from itensdevenda i inner join produto p 
-on i.produto_id = p.id inner join venda v
-on v.id = i.venda_id;
+create table administrador(
+id bigint auto_increment primary key,
+email varchar(255),
+senha varchar(255)
+);
+
+insert into administrador values(null,'guleite3@gmail.com','guguevivi2022');
