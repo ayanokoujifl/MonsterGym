@@ -13,12 +13,11 @@ class DaoEquipamento
     public function incluir(Equipamento $equipamento)
     {
 
-        $sql = 'insert into Equipamentos (nome,modalidades,periodo_revisao) values(?,?,?);';
+        $sql = 'insert into Equipamento (nome,periodo_revisao,id_fornecedor) values(?,?,?);';
         $pst = Conexao::getPreparedStatement($sql);
-
         $pst->bindValue(1, $equipamento->getNome());
-        $pst->bindValue(2, $equipamento->getModalidade());
-        $pst->bindValue(3, $equipamento->getTempoRevisao());
+        $pst->bindValue(2, $equipamento->getTempoRevisao());
+        $pst->bindValue(3, $equipamento->getFornecedor());
         if ($pst->execute()) {
             return true;
         } else {

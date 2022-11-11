@@ -15,18 +15,17 @@
 <body>
     <?php
 
-    require_once './formCadastroModalidade.php';
     require_once '../dao/DaoModalidade.php';
-    require_once '../modelo/Modalidade.php';
+    require_once '../models/Modalidade.php';
     require_once '../dao/Conexao.php';
 
     $nome = filter_input(INPUT_POST, 'input_nome');
     $valor = filter_input(INPUT_POST, 'input_valor');
 
-    $func = new Modalidade(null, $nome, $valor);
+    $modalidade = new Modalidade($nome, $valor);
     $dc = new DaoModalidade();
-    if ($dc->incluir($func)) {
-        echo '<span class="formResp">' .$func->getNome() . ' cadastrado com sucesso!</span>';
+    if ($dc->incluir($modalidade)) {
+        echo '<span class="formResp">' . $modalidade->getNome() . ' cadastrado com sucesso!</span>';
     } else {
         echo '<span class="formResp">Erro no cadastro de modalidade!</span>';
     }

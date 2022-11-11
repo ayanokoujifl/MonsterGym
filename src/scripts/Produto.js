@@ -43,4 +43,9 @@ window.addEventListener('load', () => {
         })
       })
     })
+    .then((response) => {
+      response.map((product) => {
+        console.log(product.nome)
+      })
+    })
 })

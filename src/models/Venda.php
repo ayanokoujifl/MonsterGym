@@ -5,11 +5,16 @@ class Venda
   private $id;
   private $data_venda;
   private $cliente;
+  private $produto;
+  private $quantidade;
 
-  function __construct($data, $cliente)
+
+  function __construct($data, $cliente, $produto, $quantidade)
   {
     $this->data_venda = $data;
     $this->cliente = $cliente;
+    $this->produto = $produto;
+    $this->quantidade = $quantidade;
   }
 
   /**
@@ -62,6 +67,42 @@ class Venda
   public function setCliente($cliente): self
   {
     $this->cliente = $cliente;
+
+    return $this;
+  }
+
+  /**
+   * Get the value of produto
+   */
+  public function getProduto()
+  {
+    return $this->produto;
+  }
+
+  /**
+   * Set the value of produto
+   */
+  public function setProduto($produto): self
+  {
+    $this->produto = $produto;
+
+    return $this;
+  }
+
+  /**
+   * Get the value of quantidade
+   */
+  public function getQuantidade()
+  {
+    return $this->quantidade;
+  }
+
+  /**
+   * Set the value of quantidade
+   */
+  public function setQuantidade($quantidade): self
+  {
+    $this->quantidade = $quantidade;
 
     return $this;
   }

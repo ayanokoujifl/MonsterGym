@@ -15,20 +15,20 @@
 <body>
   <?php
 
-  require_once './formCadastroEquipamento.php';
   require_once '../dao/DaoVenda.php';
   require_once '../models/Venda.php';
   require_once '../dao/Conexao.php';
 
-  $data = filter_input(INPUT_POST, 'data');
-  $cliente = filter_input(INPUT_POST, 'cliente');
+  $data = filter_input(INPUT_POST, 'dateSale');
+  $cliente = filter_input(INPUT_POST, 'client');
+  $quantidade = filter_input(INPUT_POST, 'quantity');
+  $produto = filter_input(INPUT_POST, 'value-product');
 
-  $venda = new Venda($data, $cliente);
-  $dc = new DaoEquipamento();
-  if ($dc->incluir($func)) {
-    echo '<span class="formResp">' . $func->getNome() . ' cadastrado com sucesso!</span>';
+  $dc = new DaoVenda();
+  if ($dc->incluir($data, $cliente, $produto, $quantidade)) {
+    echo '<span class="formResp">Venda cadastrada com sucesso!</span>';
   } else {
-    echo '<span class="formResp">Erro no cadastro do Equipamento!</span>';
+    echo '<span class="formResp">Erro no cadastro da venda!</span>';
   }
   ?>
 </body>

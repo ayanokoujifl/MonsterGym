@@ -10,25 +10,25 @@ class DaoModalidade
         return $lista;
     }
 
-    public function incluir(Modalidade $equipamento)
+    public function incluir(Modalidade $modalidade)
     {
 
         $sql = 'insert into modalidade(nome,valor) values(?,?);';
         $pst = Conexao::getPreparedStatement($sql);
 
-        $pst->bindValue(1, $equipamento->getNome());
-        $pst->bindValue(2, $equipamento->getValor());
+        $pst->bindValue(1, $modalidade->getNome());
+        $pst->bindValue(2, $modalidade->getValor());
         if ($pst->execute()) {
             return true;
         } else {
             return false;
         }
     }
-    public function remover(Modalidade $modalidade)
+    public function remover( $id)
     {
         $sql = 'delete from modalidade where id=?';
         $pst = Conexao::getPreparedStatement($sql);
-        $pst->bindValue(1, $modalidade->getId());
+        $pst->bindValue(1, $id);
         if ($pst->execute()) {
             return true;
         } else {

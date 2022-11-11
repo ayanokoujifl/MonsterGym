@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
@@ -39,8 +39,8 @@
     </h2>
 
 
-    <table class="mx-auto mt-6">
-        <tr class="border-b-2 border-teal-700">
+    <table class="mx-auto mt-6 bg-teal-900 rounded-md outline outline-4 p-4 outline-teal-200 w-auto">
+        <tr class="border-b-2 border-teal-700 p-4">
             <th>
                 ID
             </th>
@@ -68,7 +68,7 @@
         $lista = $dc->listar();
 
         foreach ($lista as $linha) {
-            echo '<tr>';
+            echo '<tr class="border border-b-teal-700">';
             echo '<td>' . $linha['id'] . '</td>';
             echo '<td>' . $linha['nome'] . '</td>';
             echo '<td>' . $linha['cpf'] . '</td>';

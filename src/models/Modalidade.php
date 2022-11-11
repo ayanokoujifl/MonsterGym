@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -10,68 +9,68 @@
 </head>
 
 <body>
-<?php
-class Modalidade{
-    private $id;
-    private $nome;
-    private $valor;
-
-    function __construct($id,$nome,$valor)
+    <?php
+    class Modalidade
     {
-        $this->id=$id;
-        $this->nome=$nome;
-        $this->valor=$valor;
+        private $id;
+        private $nome;
+        private $valor;
+
+        function __construct($nome, $valor)
+        {
+            $this->nome = $nome;
+            $this->valor = $valor;
+        }
+
+        public function getId()
+        {
+            return $this->id;
+        }
+
+        public function setId($id): self
+        {
+            $this->id = $id;
+
+            return $this;
+        }
+
+        /**
+         * Get the value of nome
+         */
+        public function getNome()
+        {
+            return $this->nome;
+        }
+
+        /**
+         * Set the value of nome
+         */
+        public function setNome($nome): self
+        {
+            $this->nome = $nome;
+
+            return $this;
+        }
+
+        /**
+         * Get the value of valor
+         */
+        public function getValor()
+        {
+            return $this->valor;
+        }
+
+        /**
+         * Set the value of valor
+         */
+        public function setValor($valor): self
+        {
+            $this->valor = $valor;
+
+            return $this;
+        }
     }
-
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    public function setId($id): self
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of nome
-     */
-    public function getNome()
-    {
-        return $this->nome;
-    }
-
-    /**
-     * Set the value of nome
-     */
-    public function setNome($nome): self
-    {
-        $this->nome = $nome;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of valor
-     */
-    public function getValor()
-    {
-        return $this->valor;
-    }
-
-    /**
-     * Set the value of valor
-     */
-    public function setValor($valor): self
-    {
-        $this->valor = $valor;
-
-        return $this;
-    }
-}
-?>
+    ?>
 </body>
 
 </html>

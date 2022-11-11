@@ -14,20 +14,18 @@
 
 <body>
     <?php
-
-    require_once './formCadastroEquipamento.php';
     require_once '../dao/DaoEquipamento.php';
     require_once '../models/Equipamento.php';
     require_once '../dao/Conexao.php';
 
-    $nome = filter_input(INPUT_POST, 'input_nome');
-    $modalidade = filter_input(INPUT_POST, 'input_modalidade');
-    $tempo_revisao = filter_input(INPUT_POST, 'input_temporevisao');
+    $nome = filter_input(INPUT_POST, 'name');
+    $revisao = filter_input(INPUT_POST, 'reviewPeriod');
+    $fornecedor = filter_input(INPUT_POST, 'value-provider');
 
-    $func = new Equipamento(null, $nome, $modalidade, $tempo_revisao);
+    $equipment = new Equipamento($nome, $revisao, $fornecedor);
     $dc = new DaoEquipamento();
-    if ($dc->incluir($func)) {
-        echo '<span class="formResp">' . $func->getNome() . ' cadastrado com sucesso!</span>';
+    if ($dc->incluir($equipment)) {
+        echo '<span class="formResp">' . $equipment->getNome() . ' cadastrado com sucesso!</span>';
     } else {
         echo '<span class="formResp">Erro no cadastro do Equipamento!</span>';
     }
