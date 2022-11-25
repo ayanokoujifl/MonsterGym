@@ -12,18 +12,18 @@ class DaoFuncionario
         return $lista;
     }
 
-    public function incluir(Funcionario $funcionario)
+    public function incluir($nome, $cpf, $data, $diaPagamento, $salario, $tipo)
     {
 
-        $sql = 'insert into Funcionario (nome,cpf,data_nasc,salario,modalidades,recebimento) values(?,?,?,?,?,?);';
+        $sql = 'insert into Funcionario (nome,cpf,data_nascimento,dia_pagamento,salario,tipo) values(?,?,?,?,?,?);';
         $pst = Conexao::getPreparedStatement($sql);
 
-        $pst->bindValue(1, $funcionario->getNome());
-        $pst->bindValue(2, $funcionario->getCpf());
-        $pst->bindValue(3, $funcionario->getNasc());
-        $pst->bindValue(4, $funcionario->getSalario());
-        $pst->bindValue(5, $funcionario->getModalidade());
-        $pst->bindValue(6, $funcionario->getRecebimento());
+        $pst->bindValue(1, $nome);
+        $pst->bindValue(2, $cpf);
+        $pst->bindValue(3, $data);
+        $pst->bindValue(4, $diaPagamento);
+        $pst->bindValue(5, $salario);
+        $pst->bindValue(6, $tipo);
 
         if ($pst->execute()) {
             return true;

@@ -1,24 +1,16 @@
 window.addEventListener('load', () => {
-  fetch('http://localhost/Monstergym/src/api/produtos.php')
+  fetch('http://localhost/Monstergym/src/api/clientes.php')
     .then((response) => {
       return response.json()
     })
     .then((dados) => {
-      /* let select = document.querySelector('#product')
-      dados.map((product) => {
-        let opt = document.createElement('option')
-        opt.innerHTML = `<p> ${product.nome} </p>`
-        opt.value = product.id
-        select.append(opt)
-      })*/
-      let ul = document.querySelector('#product')
+      let ul = document.querySelector('#list-client')
       ul.style.color = '#0f766e'
       ul.style.cursor = 'pointer'
-
-      dados.map((product) => {
+      dados.map((client) => {
         let li = document.createElement('li')
-        li.innerText = product.nome
-        li.value = product.id
+        li.innerText = client.nome
+        li.value = client.id
         ul.appendChild(li)
         li.style.display = 'none'
         ul.addEventListener('click', () => {
@@ -40,9 +32,9 @@ window.addEventListener('load', () => {
           li.style.display = 'none'
         })
         li.addEventListener('click', () => {
-          let valueProduct = document.querySelector('#value-product')
-          valueProduct.value = product.id
-          ul.innerText = product.nome
+          let valueProduct = document.querySelector('#client')
+          valueProduct.value = client.id
+          ul.innerText = client.nome
           ul.style.color = '#ccfbf1'
         })
       })
